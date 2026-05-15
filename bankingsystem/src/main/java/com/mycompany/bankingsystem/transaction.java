@@ -22,15 +22,20 @@ import javax.swing.table.DefaultTableModel;
  */
 public class transaction extends javax.swing.JFrame {
     int accId;
+    public static boolean aiFrame = false;
+     public static boolean mainFrame = true;
+      public static String posit = "Admin";
     /**
      * Creates new form searchUser
      */
     public transaction() {
+        setUndecorated(true);
         initComponents();
         
         setLocationRelativeTo(null);
     }
     public transaction(int id) {
+        setUndecorated(true);
         initComponents();
         
         setLocationRelativeTo(null);
@@ -209,10 +214,7 @@ public class transaction extends javax.swing.JFrame {
         transactionBtn = new javax.swing.JButton();
         pfpContainer = new javax.swing.JPanel();
         settingsBtn = new javax.swing.JButton();
-        searchBtn1 = new javax.swing.JButton();
         searchBtn2 = new javax.swing.JButton();
-        searchBtn3 = new javax.swing.JButton();
-        searchBtn4 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         mainTable = new javax.swing.JTable();
         filterInput = new javax.swing.JTextField();
@@ -228,6 +230,7 @@ public class transaction extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(200, 500));
 
         dash.setBackground(new java.awt.Color(255, 196, 196));
+        dash.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 12)); // NOI18N
         dash.setForeground(new java.awt.Color(133, 14, 53));
         dash.setText("Dashboard");
         dash.setPreferredSize(new java.awt.Dimension(72, 35));
@@ -238,11 +241,18 @@ public class transaction extends javax.swing.JFrame {
         });
 
         logout.setBackground(new java.awt.Color(255, 196, 196));
+        logout.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 12)); // NOI18N
         logout.setForeground(new java.awt.Color(133, 14, 53));
         logout.setText("Logout");
         logout.setPreferredSize(new java.awt.Dimension(75, 35));
+        logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutActionPerformed(evt);
+            }
+        });
 
         transactionBtn.setBackground(new java.awt.Color(238, 105, 131));
+        transactionBtn.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 12)); // NOI18N
         transactionBtn.setForeground(new java.awt.Color(133, 14, 53));
         transactionBtn.setText("Transaction History");
         transactionBtn.setPreferredSize(new java.awt.Dimension(75, 35));
@@ -268,47 +278,24 @@ public class transaction extends javax.swing.JFrame {
         );
 
         settingsBtn.setBackground(new java.awt.Color(255, 196, 196));
+        settingsBtn.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 12)); // NOI18N
         settingsBtn.setForeground(new java.awt.Color(133, 14, 53));
         settingsBtn.setText("Settings");
         settingsBtn.setPreferredSize(new java.awt.Dimension(75, 35));
-
-        searchBtn1.setBackground(new java.awt.Color(255, 196, 196));
-        searchBtn1.setForeground(new java.awt.Color(133, 14, 53));
-        searchBtn1.setText("Capital");
-        searchBtn1.setPreferredSize(new java.awt.Dimension(72, 35));
-        searchBtn1.addActionListener(new java.awt.event.ActionListener() {
+        settingsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchBtn1ActionPerformed(evt);
+                settingsBtnActionPerformed(evt);
             }
         });
 
         searchBtn2.setBackground(new java.awt.Color(255, 196, 196));
+        searchBtn2.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 12)); // NOI18N
         searchBtn2.setForeground(new java.awt.Color(133, 14, 53));
         searchBtn2.setText("Accounts");
         searchBtn2.setPreferredSize(new java.awt.Dimension(72, 35));
         searchBtn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchBtn2ActionPerformed(evt);
-            }
-        });
-
-        searchBtn3.setBackground(new java.awt.Color(255, 196, 196));
-        searchBtn3.setForeground(new java.awt.Color(133, 14, 53));
-        searchBtn3.setText("Active Loans");
-        searchBtn3.setPreferredSize(new java.awt.Dimension(72, 35));
-        searchBtn3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchBtn3ActionPerformed(evt);
-            }
-        });
-
-        searchBtn4.setBackground(new java.awt.Color(255, 196, 196));
-        searchBtn4.setForeground(new java.awt.Color(133, 14, 53));
-        searchBtn4.setText("Withdrawals");
-        searchBtn4.setPreferredSize(new java.awt.Dimension(72, 35));
-        searchBtn4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchBtn4ActionPerformed(evt);
             }
         });
 
@@ -319,14 +306,11 @@ public class transaction extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(searchBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logout, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
                     .addComponent(dash, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(transactionBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pfpContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(searchBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(searchBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(searchBtn4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(settingsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -341,13 +325,7 @@ public class transaction extends javax.swing.JFrame {
                 .addComponent(searchBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
                 .addComponent(transactionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(searchBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(searchBtn4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(searchBtn3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(153, 153, 153)
                 .addComponent(settingsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -392,6 +370,8 @@ public class transaction extends javax.swing.JFrame {
             mainTable.getColumnModel().getColumn(1).setResizable(false);
         }
 
+        filterInput.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 12)); // NOI18N
+        filterInput.setForeground(new java.awt.Color(133, 14, 53));
         filterInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filterInputActionPerformed(evt);
@@ -399,6 +379,8 @@ public class transaction extends javax.swing.JFrame {
         });
 
         filter.setBackground(new java.awt.Color(255, 196, 196));
+        filter.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 12)); // NOI18N
+        filter.setForeground(new java.awt.Color(133, 14, 53));
         filter.setText("Filter");
         filter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -406,8 +388,12 @@ public class transaction extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(133, 14, 53));
         jLabel1.setText("Filter Type");
 
+        jLabel2.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(133, 14, 53));
         jLabel2.setText("Filter Data");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -420,7 +406,6 @@ public class transaction extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 743, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(filterType, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -450,9 +435,9 @@ public class transaction extends javax.swing.JFrame {
                         .addComponent(filterType, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(filterInput, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(filter))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(filter, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(filterInput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
@@ -467,8 +452,8 @@ public class transaction extends javax.swing.JFrame {
 
     private void filterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterActionPerformed
         
-        
-        if (filterInput.getText().trim().isEmpty()){
+        try{
+            if (filterInput.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(null, "Input At Least One", "Error", JOptionPane.ERROR_MESSAGE);
             updateTable();
             return;
@@ -485,6 +470,10 @@ public class transaction extends javax.swing.JFrame {
             
             FilteredTableString(type);
         }
+        }catch(Exception e){
+            ErrorManager.showError((java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this), 0);
+        }
+        
         
         
     }//GEN-LAST:event_filterActionPerformed
@@ -503,13 +492,6 @@ public class transaction extends javax.swing.JFrame {
         transact.setVisible(true);
     }//GEN-LAST:event_transactionBtnActionPerformed
 
-    private void searchBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtn1ActionPerformed
-        adminData capital = new adminData(accId);
-        this.setVisible(false);
-        this.dispose();
-        capital.setVisible(true);
-    }//GEN-LAST:event_searchBtn1ActionPerformed
-
     private void searchBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtn2ActionPerformed
         searchUser user =  new searchUser(accId);
         this.setVisible(false);
@@ -518,19 +500,14 @@ public class transaction extends javax.swing.JFrame {
 
     }//GEN-LAST:event_searchBtn2ActionPerformed
 
-    private void searchBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtn3ActionPerformed
-        activeloans activeloans = new activeloans(accId);
-        this.setVisible(false);
-        this.dispose();
-        activeloans.setVisible(true);
-    }//GEN-LAST:event_searchBtn3ActionPerformed
+    private void settingsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsBtnActionPerformed
+        Setting set = new Setting(accId,aiFrame,posit);
+        transition.switchFrame(this,set);
+    }//GEN-LAST:event_settingsBtnActionPerformed
 
-    private void searchBtn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtn4ActionPerformed
-        widthrawals widthrawals = new widthrawals(accId);
-       this.setVisible(false);
-       this.dispose();
-        widthrawals.setVisible(true);
-    }//GEN-LAST:event_searchBtn4ActionPerformed
+    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
+        new logout(this).setVisible(true);
+    }//GEN-LAST:event_logoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -582,10 +559,7 @@ public class transaction extends javax.swing.JFrame {
     private javax.swing.JButton logout;
     private javax.swing.JTable mainTable;
     private javax.swing.JPanel pfpContainer;
-    private javax.swing.JButton searchBtn1;
     private javax.swing.JButton searchBtn2;
-    private javax.swing.JButton searchBtn3;
-    private javax.swing.JButton searchBtn4;
     private javax.swing.JButton settingsBtn;
     private javax.swing.JButton transactionBtn;
     // End of variables declaration//GEN-END:variables

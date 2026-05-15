@@ -125,7 +125,10 @@ public class AiFunction {
                 databaseLogic.setSavingsDeposit(amount, ui);
                 break;
             }
-
+            case "setLoan": {
+                double inputAmount = getDouble(p, "amount");
+                databaseLogic.setAddLoan(inputAmount, ui);
+            }
             case "chatBot": {
                 String message = getString(p, "message");
 

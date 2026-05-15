@@ -3,58 +3,58 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.bankingsystem;
+
 import static com.mycompany.bankingsystem.udashboard.accId;
 import static com.mycompany.bankingsystem.udashboard.posit;
 import javax.swing.*;
 import java.awt.*;
 
+public class deposit extends javax.swing.JFrame {
 
-
-
-public class deposit extends javax.swing.JFrame  {
     private int accId;
     boolean aiFrame;
     String posit;
+
     public deposit() {
         initComponents();
         setLocationRelativeTo(null);
         setVisible(true);
-    
-    // 1. Create your image panel
+
+        // 1. Create your image panel
         profile pfp = new profile();
         pfp.setPreferredSize(new Dimension(100, 100));
-    // 2. Set a simple layout for the container so the image fills it
+        // 2. Set a simple layout for the container so the image fills it
         pfpContainer.setLayout(new BorderLayout());
 
-    // 3. Add the image to the container
+        // 3. Add the image to the container
         pfpContainer.add(pfp, BorderLayout.CENTER);
 
-    // 4. Refresh to show changes
+        // 4. Refresh to show changes
         pfpContainer.revalidate();
         pfpContainer.repaint();
     }
-    public deposit(int id,String pos) {
+
+    public deposit(int id, String pos) {
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
-        
+
         setVisible(true);
         profile pfp = new profile();
         pfp.setPreferredSize(new Dimension(100, 100));
-    // 2. Set a simple layout for the container so the image fills it
+        // 2. Set a simple layout for the container so the image fills it
         pfpContainer1.setLayout(new BorderLayout());
 
-    // 3. Add the image to the container
+        // 3. Add the image to the container
         pfpContainer1.add(pfp, BorderLayout.CENTER);
 
-    // 4. Refresh to show changes
+        // 4. Refresh to show changes
         pfpContainer1.revalidate();
         pfpContainer1.repaint();
-        
+
         accId = id;
         posit = pos;
     }
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -446,33 +446,33 @@ public class deposit extends javax.swing.JFrame  {
     }//GEN-LAST:event_logoutActionPerformed
 
     private void settingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsActionPerformed
-        Setting set = new Setting(accId,aiFrame,posit);
-        transition.switchFrame(this,set);
+        Setting set = new Setting(accId, aiFrame, posit);
+        transition.switchFrame(this, set);
     }//GEN-LAST:event_settingsActionPerformed
 
     private void transacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transacActionPerformed
-        transactionUser user = new transactionUser(accId,posit);
-        transition.switchFrame(this,user);
+        transactionUser user = new transactionUser(accId, posit);
+        transition.switchFrame(this, user);
     }//GEN-LAST:event_transacActionPerformed
 
     private void loanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loanActionPerformed
         loan loan = new loan();
-        transition.switchFrame(this,loan);
+        transition.switchFrame(this, loan);
     }//GEN-LAST:event_loanActionPerformed
 
     private void savingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savingsActionPerformed
-        sbalance sbal = new sbalance(accId,posit);
-        transition.switchFrame(this,sbal);
+        sbalance sbal = new sbalance(accId, posit);
+        transition.switchFrame(this, sbal);
     }//GEN-LAST:event_savingsActionPerformed
 
     private void withdrawTabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_withdrawTabActionPerformed
-        widthraw with = new widthraw(accId,posit);
-        transition.switchFrame(this,with);
+        widthraw with = new widthraw(accId, posit);
+        transition.switchFrame(this, with);
     }//GEN-LAST:event_withdrawTabActionPerformed
 
     private void depositTabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositTabActionPerformed
-        deposit userDash = new deposit();
-        transition.switchFrame(this,userDash);
+        deposit userDash = new deposit(accId, posit);
+        transition.switchFrame(this, userDash);
     }//GEN-LAST:event_depositTabActionPerformed
 
     private void depositActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositActionPerformed
@@ -480,45 +480,55 @@ public class deposit extends javax.swing.JFrame  {
     }//GEN-LAST:event_depositActionPerformed
 
     private void transferTabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferTabActionPerformed
-       transfer trans = new transfer(accId,posit);
-        transition.switchFrame(this,trans);
+        transfer trans = new transfer(accId, posit);
+        transition.switchFrame(this, trans);
     }//GEN-LAST:event_transferTabActionPerformed
 
     private void DconfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DconfirmActionPerformed
         cdb cdb = new cdb();
         String Ssavings = deposit.getText();
-        
-        if(Ssavings.isEmpty()){
-           ErrorManager.showError((java.awt.Frame)javax.swing.SwingUtilities.getWindowAncestor(this), 0);
-       }else{
-           try{
-               double newSavings = Double.parseDouble(Ssavings.trim());
-                cdb.setSavingsDeposit(accId, newSavings);
-                deposit.setText("0.00");
-           }catch(NumberFormatException e){           
-               ErrorManager.showError((java.awt.Frame)javax.swing.SwingUtilities.getWindowAncestor(this), 0);
-           }
-       }
+        try {
+            if (Ssavings.isEmpty()) {
+                ErrorManager.showError((java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this), 0);
+            } else {
+                double saving = Double.parseDouble(deposit.getText());
+                if (saving == 0) {
+                    ErrorManager.showError((java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this), 0);
+                } else {
+                    try {
+                        double newSavings = Double.parseDouble(Ssavings.trim());
+                        cdb.setSavingsDeposit(accId, newSavings);
+                        deposit.setText("0.00");
+                    } catch (NumberFormatException e) {
+                        ErrorManager.showError((java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this), 0);
+                    }
+                }
+
+            }
+        } catch (NumberFormatException e) {
+            ErrorManager.showError((java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this), 0);
+        }
+
     }//GEN-LAST:event_DconfirmActionPerformed
 
     private void dashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardActionPerformed
-        udashboard dashboard = new udashboard(accId,aiFrame,posit);
-        transition.switchFrame(this,dashboard);
+        udashboard dashboard = new udashboard(accId, aiFrame, posit);
+        transition.switchFrame(this, dashboard);
     }//GEN-LAST:event_dashboardActionPerformed
 
     private void dianaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dianaActionPerformed
-        new AiUi(accId, true, this,posit);
+        new AiUi(accId, true, this, posit);
     }//GEN-LAST:event_dianaActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new deposit().setVisible(true);
-                
+
             }
         });
     }

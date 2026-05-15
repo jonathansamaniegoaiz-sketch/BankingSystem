@@ -97,7 +97,7 @@ public class transactionUser extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) mainTable.getModel();
         model.setRowCount(0);
 
-        String sql = "SELECT * FROM transactions WHERE accId =" + accId;
+        String sql = "SELECT * FROM transactions WHERE accId = " + accId +" AND amount > " + amount;
                  
 
         try (Connection conn = dbconn.connect();
@@ -113,9 +113,9 @@ public class transactionUser extends javax.swing.JFrame {
                     String date = rs.getString("transacDate");
                     String trans = rs.getString("transactTo");
                 
-                    if(amountDb >= amount){
-                        model.addRow(new Object[]{tid,accId,type,amount,interest,date,trans});
-                    }
+                    
+                        model.addRow(new Object[]{tid,accId,type,amountDb,interest,date,trans});
+                    
                 
                 }
             }
@@ -548,11 +548,11 @@ public class transactionUser extends javax.swing.JFrame {
             updateTable();
             return;
         } else if(filterType.getSelectedItem().toString().trim().equals("Above")){
-            double amount = Integer.parseInt(filterInput.getText().trim());
+            double amount = Double.parseDouble(filterInput.getText().trim());
             
             FilteredTable(amount);
         }else if(filterType.getSelectedItem().toString().trim().equals("Below")){
-            double amount = Integer.parseInt(filterInput.getText().trim());
+            double amount = Double.parseDouble(filterInput.getText().trim());
             
             FilteredTableTransact(amount);
         }else if(filterType.getSelectedItem().toString().trim().equals("Type")){

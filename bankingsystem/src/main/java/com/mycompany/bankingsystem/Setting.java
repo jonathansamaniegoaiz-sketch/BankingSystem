@@ -4,10 +4,6 @@
  */
 package com.mycompany.bankingsystem;
 
-import static com.mycompany.bankingsystem.udashboard.accId;
-import static com.mycompany.bankingsystem.udashboard.aiFrame;
-import static com.mycompany.bankingsystem.udashboard.posit;
-
 /**
  *
  * @author ASUS
@@ -15,13 +11,18 @@ import static com.mycompany.bankingsystem.udashboard.posit;
 public class Setting extends javax.swing.JFrame {
     int accId;
     boolean frame;
-    String posit;
+    public static String posit;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Setting.class.getName());
 
     /**
      * Creates new form Setting
      */
     public Setting() {
+    setUndecorated(true);   // IMPORTANT
+    initComponents();
+}
+    public Setting(int id) {
+    accId = id;    
     setUndecorated(true);   // IMPORTANT
     initComponents();
 }
@@ -133,8 +134,13 @@ public class Setting extends javax.swing.JFrame {
     }//GEN-LAST:event_aboutUsBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-         udashboard dashboard = new udashboard(accId,frame,posit);
-        transition.switchFrame(this,dashboard);
+        if(posit.equalsIgnoreCase("admin")){
+            adminDashboard adminDash = new adminDashboard(accId);
+            transition.switchFrame(this,adminDash);
+        } else {
+            udashboard dashboard = new udashboard(accId,frame,posit);
+            transition.switchFrame(this,dashboard);
+        }
     }//GEN-LAST:event_backBtnActionPerformed
 
     /**

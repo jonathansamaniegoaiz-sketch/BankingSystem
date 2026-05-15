@@ -99,6 +99,9 @@ public class udashboard extends javax.swing.JFrame {
         
         double Lamount = db.getTotalLoan(id);
         loanAmount.setText(String.format("%.2f", Lamount));
+        
+        double count = db.getTransactCount(id);
+        transactions.setText(String.format("%.2f", count));
     }
    
 
@@ -142,7 +145,7 @@ public class udashboard extends javax.swing.JFrame {
         transAmount = new javax.swing.JTextField();
         jPanel8 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        transacAmount = new javax.swing.JTextField();
+        transactions = new javax.swing.JTextField();
         diana = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -535,10 +538,10 @@ public class udashboard extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(133, 14, 53));
         jLabel9.setText("Transactions");
 
-        transacAmount.setEditable(false);
-        transacAmount.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 18)); // NOI18N
-        transacAmount.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        transacAmount.setText("0.00");
+        transactions.setEditable(false);
+        transactions.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 18)); // NOI18N
+        transactions.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        transactions.setText("0.00");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -551,7 +554,7 @@ public class udashboard extends javax.swing.JFrame {
                         .addComponent(jLabel9))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
-                        .addComponent(transacAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(transactions, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
@@ -560,7 +563,7 @@ public class udashboard extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel9)
                 .addGap(18, 18, 18)
-                .addComponent(transacAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(transactions, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(48, Short.MAX_VALUE))
         );
 
@@ -783,7 +786,7 @@ public class udashboard extends javax.swing.JFrame {
     private javax.swing.JButton settings;
     private javax.swing.JTextField transAmount;
     private javax.swing.JButton transac;
-    private javax.swing.JTextField transacAmount;
+    private javax.swing.JTextField transactions;
     private javax.swing.JButton transfer;
     private javax.swing.JTextField withAmount;
     private javax.swing.JButton withdraw;

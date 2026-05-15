@@ -125,8 +125,9 @@ public class ChangePIn extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        Setting setting = new Setting();
+        Setting setting = new Setting(accId,false,Setting.posit);
         transition.switchFrame(this, setting);
+        this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void oldPinTexFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_oldPinTexFieldActionPerformed

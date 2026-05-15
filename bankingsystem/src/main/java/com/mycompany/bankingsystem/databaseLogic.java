@@ -402,6 +402,7 @@ public class databaseLogic {
                         oldSavings = savings;
                     }
                 }
+                            cdb.setTotalDep(accID,newSavings);
                  String sqlTransact = "INSERT INTO transactions(transacId,accId,amount,transacType,transactTo) VALUES(null, ?, ?, ?,?)";
                     PreparedStatement pstmtTransact = conn.prepareStatement(sqlTransact);
                     pstmtTransact.setInt(1,accID);
@@ -446,7 +447,9 @@ public class databaseLogic {
                         oldSavings = savings;
                     }
                 }
-
+                
+                cdb db = new cdb();
+                db.setTotalWith(accID, newSavings);
                 String sql = "update bankingAccounts set sBalance = ? where accId=?";
                 PreparedStatement pstmt = conn.prepareStatement(sql);
                 if (oldSavings >= newSavings) {
@@ -473,6 +476,39 @@ public class databaseLogic {
             ui.appendChatBox("\nAI: Operation Cancelled");
         }
 
+    }
+    
+    public static void setAddLoan(double InputAmount, AiUi ui){
+        int id = AiUi.accId;
+        
+        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to borrow this money?", "Confirmation", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+
+        try (Connection conn = dbconn.connect()) {
+            String sql = "update bankingAccounts set lBalance = ? WHERE accId = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            
+            double amountdb = cdb.getTotalLoan(id);
+            amountdb += InputAmount;
+            
+            stmt.setDouble(1, amountdb);
+            stmt.setInt(2, id);
+            stmt.executeUpdate();
+            
+            String sqlTransact = "INSERT INTO transactions(transacId,accId,amount,transacType,transactTo) VALUES(null, ?, ?, ?,?)";
+            PreparedStatement pstmtTransact = conn.prepareStatement(sqlTransact);
+            pstmtTransact.setInt(1,id);
+            pstmtTransact.setDouble(2,InputAmount);
+            pstmtTransact.setString(3,"Loan");
+            pstmtTransact.setString(4,"Account");
+            pstmtTransact.executeUpdate();
+            ui.appendChatBox("\nAI: Loan Successful");            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+                } else {
+            ui.appendChatBox("\nAI: Operation Cancelled");
+        }
     }
 
     //chat

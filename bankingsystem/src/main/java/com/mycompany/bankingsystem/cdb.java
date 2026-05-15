@@ -47,7 +47,7 @@ public class cdb {
                 }
             }
             
-            
+            setTotalDep(accID,newSavings);
             
             
             String sql = "update bankingAccounts set sBalance = ? where accId=?";
@@ -76,6 +76,24 @@ public class cdb {
         
   
     }
+    public static void setTotalDep(int id, double amount){
+        try (Connection conn = dbconn.connect()) {
+            String sql = "update bankingAccounts set totalDep = ? WHERE accId = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            
+            
+            
+            double totalDepAmount = amount + getTotalDep(id);
+            
+            stmt.setDouble(1, totalDepAmount);
+            stmt.setInt(2, id);
+            stmt.executeUpdate();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
     public void setSavingsWithdrawEcash(int accID,double newSavings) {
         double oldSavings = 0.0;
         
@@ -91,6 +109,9 @@ public class cdb {
                     oldSavings = savings;
                 }
             }
+            
+            setTotalWith(accID,newSavings);
+            
             String sqlTransact = "INSERT INTO transactions(transacId,accId,amount,transacType,transactTo) VALUES(null, ?, ?, ?,?)";
             PreparedStatement pstmtTransact = conn.prepareStatement(sqlTransact);
             pstmtTransact.setInt(1,accID);
@@ -142,10 +163,19 @@ public class cdb {
             stmt.setInt(2, id);
             stmt.executeUpdate();
             
+            String sqlTransact = "INSERT INTO transactions(transacId,accId,amount,transacType,transactTo) VALUES(null, ?, ?, ?,?)";
+            PreparedStatement pstmtTransact = conn.prepareStatement(sqlTransact);
+            pstmtTransact.setInt(1,id);
+            pstmtTransact.setDouble(2,InputAmount);
+            pstmtTransact.setString(3,"Loan");
+            pstmtTransact.setString(4,"Account");
+            pstmtTransact.executeUpdate();
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+    
     public void setSavingsWithdrawCash(int accID,double newSavings) {
         double oldSavings = 0.0;
         
@@ -161,6 +191,9 @@ public class cdb {
                     oldSavings = savings;
                 }
             }
+            
+            setTotalWith(accID,newSavings);
+            
             String sqlTransact = "INSERT INTO transactions(transacId,accId,amount,transacType,transactTo) VALUES(null, ?, ?, ?,?)";
             PreparedStatement pstmtTransact = conn.prepareStatement(sqlTransact);
             pstmtTransact.setInt(1,accID);
@@ -259,7 +292,7 @@ public class cdb {
         
   
     }
-    public double getTotalDep(int accId) {
+    public static double getTotalDep(int accId) {
     double amount = 0.0;
 
         try (Connection conn = dbconn.connect()) {
@@ -299,6 +332,21 @@ public class cdb {
 
         return amount;
     }
+    public void setTotalWith(int id, double amount){
+        try (Connection conn = dbconn.connect()) {
+            String sql = "update bankingAccounts set totalWith = ? WHERE accId = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+           
+            double totalWithAmount = amount + getTotalWith(id);
+            
+            stmt.setDouble(1, totalWithAmount);
+            stmt.setInt(2, id);
+            stmt.executeUpdate();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     public double getTotalTrans(int accId) {
     double amount = 0.0;
 
@@ -319,7 +367,7 @@ public class cdb {
 
         return amount;
     }
-    public double getTotalLoan(int accId) {
+    public static double getTotalLoan(int accId) {
     double amount = 0.0;
 
         try (Connection conn = dbconn.connect()) {
@@ -408,7 +456,7 @@ public class cdb {
                     stmt.setInt(6,accId);
                     
                     stmt.executeUpdate();
-
+JOptionPane.showMessageDialog(null, "Sign up successfully!\n Account ID: "+accId, "Success", JOptionPane.INFORMATION_MESSAGE);
                     
 
                 } catch (Exception e) {
@@ -417,7 +465,7 @@ public class cdb {
             }
             
             // Success with a title and info icon
-            JOptionPane.showMessageDialog(null, "Sign up successfully!\n Account ID: "+accId, "Success", JOptionPane.INFORMATION_MESSAGE);
+            
     }
     public double getCapital() {
     double amount = 0.0;
@@ -519,6 +567,25 @@ public class cdb {
 
             if (rs.next()) {
                 count = rs.getInt("deac");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return count;
+    }
+    public int getTransactCount(int id){
+        int count = 0;
+
+        try (Connection conn = dbconn.connect()) {
+            String sql = "SELECT count(transacId)AS count FROM transactions where accId = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1,id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                count = rs.getInt("count");
             }
 
         } catch (SQLException e) {

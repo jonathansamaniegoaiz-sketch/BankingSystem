@@ -15,9 +15,11 @@ import javax.swing.JOptionPane;
  * @author Syncro
  */
 public class loan extends javax.swing.JFrame {
+
     int accId;
     boolean aiFrame;
     String posit;
+
     /**
      * Creates new form loan
      */
@@ -26,24 +28,22 @@ public class loan extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
-    
-    public loan(int id, String pos){
+
+    public loan(int id, String pos) {
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
         setVisible(true);
         accId = id;
         posit = pos;
-        
+
         profile pfp = new profile();
         pfp.setPreferredSize(new Dimension(100, 100));
-    
+
         pfpContainer1.setLayout(new BorderLayout());
 
-    
         pfpContainer1.add(pfp, BorderLayout.CENTER);
 
-    
         pfpContainer1.revalidate();
         pfpContainer1.repaint();
     }
@@ -393,33 +393,33 @@ public class loan extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void depositActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositActionPerformed
-        deposit userDash = new deposit(accId,posit);
-        transition.switchFrame(this,userDash);
+        deposit userDash = new deposit(accId, posit);
+        transition.switchFrame(this, userDash);
     }//GEN-LAST:event_depositActionPerformed
 
     private void withdrawActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_withdrawActionPerformed
-        widthraw with = new widthraw(accId,posit);    
-        transition.switchFrame(this,with);
+        widthraw with = new widthraw(accId, posit);
+        transition.switchFrame(this, with);
     }//GEN-LAST:event_withdrawActionPerformed
 
     private void trasnferActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trasnferActionPerformed
-        transfer trans = new transfer(accId,posit);
-        transition.switchFrame(this,trans);
+        transfer trans = new transfer(accId, posit);
+        transition.switchFrame(this, trans);
     }//GEN-LAST:event_trasnferActionPerformed
 
     private void loanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loanActionPerformed
-        loan loan = new loan(accId,posit);
-        transition.switchFrame(this,loan);
+        loan loan = new loan(accId, posit);
+        transition.switchFrame(this, loan);
     }//GEN-LAST:event_loanActionPerformed
 
     private void transacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transacActionPerformed
-        transactionUser user = new transactionUser(accId,posit);
-        transition.switchFrame(this,user);
+        transactionUser user = new transactionUser(accId, posit);
+        transition.switchFrame(this, user);
     }//GEN-LAST:event_transacActionPerformed
 
     private void settingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsActionPerformed
-        Setting set = new Setting(accId,aiFrame,posit);
-        transition.switchFrame(this,set);
+        Setting set = new Setting(accId, aiFrame, posit);
+        transition.switchFrame(this, set);
     }//GEN-LAST:event_settingsActionPerformed
 
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
@@ -427,8 +427,8 @@ public class loan extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutActionPerformed
 
     private void savings3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savings3ActionPerformed
-        sbalance sbal = new sbalance(accId,posit);
-        transition.switchFrame(this,sbal);
+        sbalance sbal = new sbalance(accId, posit);
+        transition.switchFrame(this, sbal);
     }//GEN-LAST:event_savings3ActionPerformed
 
     private void sLoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sLoanActionPerformed
@@ -436,35 +436,46 @@ public class loan extends javax.swing.JFrame {
     }//GEN-LAST:event_sLoanActionPerformed
 
     private void loanConfirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loanConfirmBtnActionPerformed
-       String loan = sLoan.getText();
-       
-       if(loan.isEmpty()){
-           ErrorManager.showError((java.awt.Frame)javax.swing.SwingUtilities.getWindowAncestor(this), 0);
-       }else{
-           try{
-               cdb db = new cdb();
-               double amount = Double.parseDouble(loan);
-               db.setAddLoan(accId,amount);
-               JOptionPane.showMessageDialog(
-            null,
-            "Book borrowed successfully!",
-            "Borrow Success",
-            JOptionPane.INFORMATION_MESSAGE
-        );
-               sLoan.setText("0.00");
-           }catch(NumberFormatException e){           
-               ErrorManager.showError((java.awt.Frame)javax.swing.SwingUtilities.getWindowAncestor(this), 0);
-           }
-       }
+
+        String Sloan = sLoan.getText();
+        try {
+            if (Sloan.isEmpty()) {
+                ErrorManager.showError((java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this), 0);
+            } else {
+                double loan = Double.parseDouble(sLoan.getText());
+                if (loan == 0) {
+                    ErrorManager.showError((java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this), 0);
+                } else {
+                    try {
+                        cdb db = new cdb();
+
+                        db.setAddLoan(accId, loan);
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "Book borrowed successfully!",
+                                "Borrow Success",
+                                JOptionPane.INFORMATION_MESSAGE
+                        );
+                        sLoan.setText("0.00");
+                    } catch (NumberFormatException e) {
+                        ErrorManager.showError((java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this), 0);
+                    }
+                }
+
+            }
+        } catch (NumberFormatException e) {
+            ErrorManager.showError((java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this), 0);
+        }
+
     }//GEN-LAST:event_loanConfirmBtnActionPerformed
 
     private void dashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardActionPerformed
-        udashboard dashboard = new udashboard(accId,aiFrame,posit);
-        transition.switchFrame(this,dashboard);
+        udashboard dashboard = new udashboard(accId, aiFrame, posit);
+        transition.switchFrame(this, dashboard);
     }//GEN-LAST:event_dashboardActionPerformed
 
     private void dianaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dianaActionPerformed
-        new AiUi(accId, true, this,posit);
+        new AiUi(accId, true, this, posit);
     }//GEN-LAST:event_dianaActionPerformed
 
     /**

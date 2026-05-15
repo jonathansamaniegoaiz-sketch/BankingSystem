@@ -18,28 +18,28 @@ public class transfer extends javax.swing.JFrame {
     private int accId;
     boolean aiFrame;
     String posit;
+
     public transfer() {
         initComponents();
         setLocationRelativeTo(null);
         setVisible(true);
     }
-    public transfer(int id,String pos) {
+
+    public transfer(int id, String pos) {
         setUndecorated(true);
         initComponents();
         setVisible(true);
-        accId = id;        
+        accId = id;
         setLocationRelativeTo(null);
         posit = pos;
-        
+
         profile pfp = new profile();
         pfp.setPreferredSize(new Dimension(100, 100));
-    
+
         pfpContainer3.setLayout(new BorderLayout());
 
-    
         pfpContainer3.add(pfp, BorderLayout.CENTER);
 
-    
         pfpContainer3.revalidate();
         pfpContainer3.repaint();
     }
@@ -439,33 +439,33 @@ public class transfer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void depositActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositActionPerformed
-        deposit userDash = new deposit(accId,posit);
-        transition.switchFrame(this,userDash);
+        deposit userDash = new deposit(accId, posit);
+        transition.switchFrame(this, userDash);
     }//GEN-LAST:event_depositActionPerformed
 
     private void withdrawActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_withdrawActionPerformed
-        widthraw with = new widthraw(accId,posit);
-        transition.switchFrame(this,with);
+        widthraw with = new widthraw(accId, posit);
+        transition.switchFrame(this, with);
     }//GEN-LAST:event_withdrawActionPerformed
 
     private void transferActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferActionPerformed
-        transfer trans = new transfer(accId,posit);
+        transfer trans = new transfer(accId, posit);
         this.dispose();
     }//GEN-LAST:event_transferActionPerformed
 
     private void loanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loanActionPerformed
-        loan loan = new loan(accId,posit);
-        transition.switchFrame(this,loan);
+        loan loan = new loan(accId, posit);
+        transition.switchFrame(this, loan);
     }//GEN-LAST:event_loanActionPerformed
 
     private void transacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transacActionPerformed
-        transactionUser user = new transactionUser(accId,posit);
-        transition.switchFrame(this,user);
+        transactionUser user = new transactionUser(accId, posit);
+        transition.switchFrame(this, user);
     }//GEN-LAST:event_transacActionPerformed
 
     private void settingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsActionPerformed
-        Setting set = new Setting(accId,aiFrame,posit);
-        transition.switchFrame(this,set);
+        Setting set = new Setting(accId, aiFrame, posit);
+        transition.switchFrame(this, set);
     }//GEN-LAST:event_settingsActionPerformed
 
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
@@ -480,25 +480,37 @@ public class transfer extends javax.swing.JFrame {
         cdb cdb = new cdb();
         String amount = Tamount.getText();
         String id = Tid.getText();
-        
-        if(id.isEmpty() || amount.isEmpty()){
-           ErrorManager.showError((java.awt.Frame)javax.swing.SwingUtilities.getWindowAncestor(this), 0);
-       }else{
-           try{
-               double transferAmount = Double.parseDouble(amount.trim());
-               int transferId = Integer.parseInt(id.trim());
-               cdb.Transfer(accId,transferId, transferAmount);
-               Tamount.setText("0.00");
-               Tid.setText("");
-           }catch(NumberFormatException e){           
-               ErrorManager.showError((java.awt.Frame)javax.swing.SwingUtilities.getWindowAncestor(this), 0);
-           }
-       }
+        try {
+            if (id.isEmpty() || amount.isEmpty()) {
+                ErrorManager.showError((java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this), 0);
+            } else {
+                int cid = Integer.parseInt(Tid.getText());
+                Double camount = Double.parseDouble(Tamount.getText());
+                if (cid == 0 || camount == 0) {
+                    ErrorManager.showError((java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this), 0);
+                } else {
+                    try {
+                        double transferAmount = Double.parseDouble(amount.trim());
+                        int transferId = Integer.parseInt(id.trim());
+                        cdb.Transfer(accId, transferId, transferAmount);
+                        Tamount.setText("0.00");
+                        Tid.setText("");
+                    } catch (NumberFormatException e) {
+                        ErrorManager.showError((java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this), 0);
+                    }
+                }
+
+            }
+        } catch (NumberFormatException e) {
+            ErrorManager.showError((java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this), 0);
+
+        }
+
     }//GEN-LAST:event_confirmBtn2ActionPerformed
 
     private void savings3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savings3ActionPerformed
-        sbalance sbal = new sbalance(accId,posit);
-        transition.switchFrame(this,sbal);
+        sbalance sbal = new sbalance(accId, posit);
+        transition.switchFrame(this, sbal);
     }//GEN-LAST:event_savings3ActionPerformed
 
     private void TamountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TamountActionPerformed
@@ -506,12 +518,12 @@ public class transfer extends javax.swing.JFrame {
     }//GEN-LAST:event_TamountActionPerformed
 
     private void dashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardActionPerformed
-        udashboard dashboard = new udashboard(accId,aiFrame,posit);
-        transition.switchFrame(this,dashboard);
+        udashboard dashboard = new udashboard(accId, aiFrame, posit);
+        transition.switchFrame(this, dashboard);
     }//GEN-LAST:event_dashboardActionPerformed
 
     private void dianaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dianaActionPerformed
-        new AiUi(accId, true, this,posit);
+        new AiUi(accId, true, this, posit);
     }//GEN-LAST:event_dianaActionPerformed
 
     /**

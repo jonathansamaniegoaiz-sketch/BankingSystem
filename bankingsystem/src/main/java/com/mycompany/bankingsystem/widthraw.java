@@ -14,9 +14,11 @@ import java.awt.Dimension;
  * @author student
  */
 public class widthraw extends javax.swing.JFrame {
+
     int accId;
     boolean aiFrame;
     String posit;
+
     /**
      * Creates new form widthraw
      */
@@ -25,26 +27,26 @@ public class widthraw extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
-    public widthraw(int id,String pos) {
+
+    public widthraw(int id, String pos) {
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
         setVisible(true);
         accId = id;
         posit = pos;
-        
+
         profile pfp = new profile();
         pfp.setPreferredSize(new Dimension(100, 100));
-    
+
         pfpContainer.setLayout(new BorderLayout());
 
-    
         pfpContainer.add(pfp, BorderLayout.CENTER);
 
-    
         pfpContainer.revalidate();
         pfpContainer.repaint();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -462,34 +464,34 @@ public class widthraw extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void depositActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositActionPerformed
-        deposit userDash = new deposit(accId,posit);
-        transition.switchFrame(this,userDash);
+        deposit userDash = new deposit(accId, posit);
+        transition.switchFrame(this, userDash);
 
     }//GEN-LAST:event_depositActionPerformed
 
     private void withdrawActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_withdrawActionPerformed
-        widthraw with = new widthraw(accId,posit);
-        transition.switchFrame(this,with);
+        widthraw with = new widthraw(accId, posit);
+        transition.switchFrame(this, with);
     }//GEN-LAST:event_withdrawActionPerformed
 
     private void transferActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferActionPerformed
-        transfer trans = new transfer(accId,posit);
-        transition.switchFrame(this,trans);
+        transfer trans = new transfer(accId, posit);
+        transition.switchFrame(this, trans);
     }//GEN-LAST:event_transferActionPerformed
 
     private void loanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loanActionPerformed
-        loan loan = new loan(accId,posit);
-        transition.switchFrame(this,loan);
+        loan loan = new loan(accId, posit);
+        transition.switchFrame(this, loan);
     }//GEN-LAST:event_loanActionPerformed
 
     private void transacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transacActionPerformed
-        transactionUser user = new transactionUser(accId,posit);
-        transition.switchFrame(this,user);
+        transactionUser user = new transactionUser(accId, posit);
+        transition.switchFrame(this, user);
     }//GEN-LAST:event_transacActionPerformed
 
     private void settingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsActionPerformed
-        Setting set = new Setting(accId,aiFrame,posit);
-        transition.switchFrame(this,set);
+        Setting set = new Setting(accId, aiFrame, posit);
+        transition.switchFrame(this, set);
     }//GEN-LAST:event_settingsActionPerformed
 
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
@@ -501,7 +503,7 @@ public class widthraw extends javax.swing.JFrame {
     }//GEN-LAST:event_savings1ActionPerformed
 
     private void cashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashActionPerformed
-        widthrawWithCash cash = new widthrawWithCash(accId,posit);
+        widthrawWithCash cash = new widthrawWithCash(accId, posit);
         this.setVisible(false);
         cash.setVisible(true);
     }//GEN-LAST:event_cashActionPerformed
@@ -513,31 +515,41 @@ public class widthraw extends javax.swing.JFrame {
     private void confirmBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBtn2ActionPerformed
         cdb db = new cdb();
         String Wsavings = amount.getText();
-        
-        if(Wsavings.isEmpty()){
-           ErrorManager.showError((java.awt.Frame)javax.swing.SwingUtilities.getWindowAncestor(this), 0);
-       }else{
-           try{
-               double newSavings = Double.parseDouble(Wsavings.trim());
-                db.setSavingsWithdrawEcash(accId, newSavings);
-                ecashNum.setText("");
-                amount.setText("0.00");
-           }catch(NumberFormatException e){           
-               ErrorManager.showError((java.awt.Frame)javax.swing.SwingUtilities.getWindowAncestor(this), 0);
-           }
-       }
-        
+        try {
+            if (Wsavings.isEmpty()) {
+                ErrorManager.showError((java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this), 0);
+            } else {
+                double saving = Double.parseDouble(amount.getText());
+                if (saving == 0) {
+                    ErrorManager.showError((java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this), 0);
+                } else {
+                    try {
+                        double newSavings = Double.parseDouble(Wsavings.trim());
+                        db.setSavingsWithdrawEcash(accId, newSavings);
+                        ecashNum.setText("");
+                        amount.setText("0.00");
+                    } catch (NumberFormatException e) {
+                        ErrorManager.showError((java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this), 0);
+                    }
+                }
+
+            }
+        } catch (NumberFormatException e) {
+            ErrorManager.showError((java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this), 0);
+        }
+
+
     }//GEN-LAST:event_confirmBtn2ActionPerformed
 
     private void savings3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savings3ActionPerformed
-        sbalance sbal = new sbalance(accId,posit);
-        transition.switchFrame(this,sbal);
-       
+        sbalance sbal = new sbalance(accId, posit);
+        transition.switchFrame(this, sbal);
+
     }//GEN-LAST:event_savings3ActionPerformed
 
     private void dashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardActionPerformed
-        udashboard dashboard = new udashboard(accId,aiFrame,posit);
-        transition.switchFrame(this,dashboard);
+        udashboard dashboard = new udashboard(accId, aiFrame, posit);
+        transition.switchFrame(this, dashboard);
     }//GEN-LAST:event_dashboardActionPerformed
 
     private void amountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amountActionPerformed
@@ -547,7 +559,7 @@ public class widthraw extends javax.swing.JFrame {
     private void dianaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dianaActionPerformed
 
         // hide main dashboard
-        new AiUi(accId, true, this,posit);
+        new AiUi(accId, true, this, posit);
         // TODO add your handling code here:
     }//GEN-LAST:event_dianaActionPerformed
 

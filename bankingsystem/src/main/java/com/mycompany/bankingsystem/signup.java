@@ -1,10 +1,11 @@
-
 package com.mycompany.bankingsystem;
+
 import java.sql.*;
 import javax.swing.*;
 import java.awt.*;
 
 public class signup extends javax.swing.JFrame {
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(signup.class.getName());
 
     public signup() {
@@ -14,7 +15,7 @@ public class signup extends javax.swing.JFrame {
         ButtonGroup buttonGroup = new ButtonGroup();
         buttonGroup.add(male);
         buttonGroup.add(fmale);
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -228,25 +229,42 @@ public class signup extends javax.swing.JFrame {
 
     private void signBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signBtnActionPerformed
         cdb db = new cdb();
-        String pin = JOptionPane.showInputDialog(null, "Enter Desired Pin:", "Input", JOptionPane.QUESTION_MESSAGE);
+        
+        try{
+            String pin = JOptionPane.showInputDialog(null, "Enter Desired Pin:", "Input", JOptionPane.QUESTION_MESSAGE);
         int pinInt = Integer.parseInt(pin);
         String name = nameIn.getText();
         int age = (int) ageIn.getValue();
         String address = addressIn.getText();
         String phone = phoneIn.getText();
         String sex = "";
-
+        
         if (male.isSelected()) {
             sex = "m";
-        }else if (fmale.isSelected()) {
+        } else if (fmale.isSelected()) {
             sex = "f";
         }
         
-        db.addUser(name,age,address,phone,pinInt,"user",sex,"active");
+        if(!name.isEmpty()||age > 0||!address.isEmpty()||!phone.isEmpty()||!sex.isEmpty()||pin.length()==6){
+        db.addUser(name, age, address, phone, pinInt, "user", sex, "active");}
+        else{
+            ErrorManager.showError((java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this), 0);
+        }
+        }catch(Exception e){
+            ErrorManager.showError((java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this), 0);
+        }
+        
+
+      
+
+        /*if(pin.length()< 6 || pin.length() > 6 ){
+            JOptionPane.showMessageDialog(this,"PIN must be at least 6 digits.","Invalid PIN",JOptionPane.ERROR_MESSAGE);
+        }*/
+        
     }//GEN-LAST:event_signBtnActionPerformed
 
     private void nameInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameInActionPerformed
-        
+
     }//GEN-LAST:event_nameInActionPerformed
 
     /**

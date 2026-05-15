@@ -65,9 +65,12 @@ public class OllamaService {
 
         + "13. setSavingDeposit -> {\"amount\": double}\n"
         + "    Description: Deposit money into the current user's savings balance.\n"
+          
+        + "14. setLoan -> {\"amount\": double}\n"
+        + "    Description: Add loan to user current account"
 
-        + "14. chatBot -> {\"message\": string}\n"
-        + "    Description: Respond conversationally when no valid action applies.\n\n"
+        + "15. chatBot -> {\"message\": string}\n"
+        + "    Description: Respond conversationally when no valid action applies. Make usre its connected to user prompt. when giving sample function use the SelectByName only\n\n"
 
         + "STRICT ACTION MAPPING:\n"
         + "- If input contains 'add' → use addUser\n"
@@ -83,6 +86,7 @@ public class OllamaService {
         + "- If input contains 'transfer', 'send', or 'give' → use transfer\n"
         + "- If input contains 'withdraw' → use setSavingWithdraw\n"
         + "- If input contains 'deposit' → use setSavingDeposit\n"
+        + "- If input contains 'borrow', 'loan' → use setLoan\n"
         + "- Otherwise → use chatBot\n\n"
 
         + "STRICT RULES:\n"
@@ -91,9 +95,11 @@ public class OllamaService {
         + "- MUST match exact parameter names\n"
         + "- addUser MUST NOT include id\n"
         + "- All balances must be positive\n\n"
+        + "- ChatBot parameter should never be empty"
 
         + "FALLBACK:\n"
         + "- If required data is missing → use chatBot\n\n"
+        + "- If action mapping is invalid → use chatBot\n\n"
 
         + "INPUT RULE:\n"
         + "- Only read text between ### USER INPUT ### and ### END ###\n";
