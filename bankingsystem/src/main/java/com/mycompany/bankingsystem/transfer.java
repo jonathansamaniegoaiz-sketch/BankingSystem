@@ -486,7 +486,7 @@ public class transfer extends javax.swing.JFrame {
             } else {
                 int cid = Integer.parseInt(Tid.getText());
                 Double camount = Double.parseDouble(Tamount.getText());
-                if (cid == 0 || camount == 0) {
+                if (cid <= 0 || camount <= 0) {
                     ErrorManager.showError((java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this), 0);
                 } else {
                     try {

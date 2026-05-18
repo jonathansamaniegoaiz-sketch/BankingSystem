@@ -273,18 +273,26 @@ public class cdb {
                     oldSavings2 = savings;
                 }
             }
-            
+            oldSavings2 += amount;
             String sql2 = "update bankingAccounts set sBalance = ? where accId=?";
             PreparedStatement pstmt2 = conn.prepareStatement(sql2);
-            pstmt2.setDouble(1,oldSavings2+ amount);
+            pstmt2.setDouble(1, oldSavings2);
             pstmt2.setInt(2,accID);
             
             int totalAffected = pstmt2.executeUpdate() + rowsAffected;
             
+            String sql3 = "update bankingAccounts set totalTrans = ? where accId=?";
+            PreparedStatement pstmt3 = conn.prepareStatement(sql3);
+            
+            pstmt3.setDouble(1,getTotalTrans(userId) + amount);
+            pstmt3.setInt(2,userId);
+            
+            pstmt3.executeUpdate();
             
             if(rowsAffected>0){
                 JOptionPane.showMessageDialog(null,"TRANSFER SUCCESSFUL");
             }
+            
             
         }catch(SQLException e){
             e.printStackTrace();
@@ -347,7 +355,7 @@ public class cdb {
             e.printStackTrace();
         }
     }
-    public double getTotalTrans(int accId) {
+    public static double getTotalTrans(int accId) {
     double amount = 0.0;
 
         try (Connection conn = dbconn.connect()) {
@@ -593,5 +601,29 @@ JOptionPane.showMessageDialog(null, "Sign up successfully!\n Account ID: "+accId
         }
 
         return count;
+    }
+    public void payLoan(int id, double payloan){
+        
+        
+        try (Connection conn = dbconn.connect()) {
+            String sql = "update bankingAccounts set lBalance = ? WHERE accId = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+           
+            double rLoan = getTotalLoan(id) - payloan;
+            
+            stmt.setDouble(1, rLoan);
+            stmt.setInt(2, id);
+            stmt.executeUpdate();
+            
+            String sqlTransact = "INSERT INTO transactions(transacId,accId,amount,transacType,transactTo) VALUES(null, ?, ?, ?,?)";
+            PreparedStatement pstmtTransact = conn.prepareStatement(sqlTransact);
+            pstmtTransact.setInt(1,id);
+            pstmtTransact.setDouble(2,payloan);
+            pstmtTransact.setString(3,"Loan Payment");
+            pstmtTransact.setString(4,"Cash");
+            pstmtTransact.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

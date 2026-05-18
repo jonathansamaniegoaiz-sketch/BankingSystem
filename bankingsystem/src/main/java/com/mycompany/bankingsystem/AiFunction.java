@@ -105,22 +105,22 @@ public class AiFunction {
                 System.out.println("SELECT BY NAME EXECUTED");
                 break;
             }
-            
+
             case "transfer": {
                 int userId = getInt(p, "senderId");
                 int actId = getInt(p, "receiverId");
                 double amount = getDouble(p, "amount");
-                
+
                 databaseLogic.Transfer(actId, amount, ui);
                 break;
             }
-            case "setSavingWithdraw":{
+            case "setSavingWithdraw": {
                 double amount = getDouble(p, "amount");
                 databaseLogic.setSavingsWithdraw(amount, ui);
                 break;
             }
-            
-            case "setSavingDeposit":{
+
+            case "setSavingDeposit": {
                 double amount = getDouble(p, "amount");
                 databaseLogic.setSavingsDeposit(amount, ui);
                 break;
@@ -128,6 +128,12 @@ public class AiFunction {
             case "setLoan": {
                 double inputAmount = getDouble(p, "amount");
                 databaseLogic.setAddLoan(inputAmount, ui);
+                break;
+            }
+            case "payLoan": {
+                double paypay = getDouble(p, "payment");
+                databaseLogic.payLoan(paypay, ui);
+                break;
             }
             case "chatBot": {
                 String message = getString(p, "message");
@@ -146,7 +152,6 @@ public class AiFunction {
     // ============================
     // 🔒 SAFE PARSING HELPERS
     // ============================
-
     private static String getString(JsonObject p, String key) {
         return (p.has(key) && !p.get(key).isJsonNull())
                 ? p.get(key).getAsString()

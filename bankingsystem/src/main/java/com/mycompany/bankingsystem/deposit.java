@@ -492,7 +492,7 @@ public class deposit extends javax.swing.JFrame {
                 ErrorManager.showError((java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this), 0);
             } else {
                 double saving = Double.parseDouble(deposit.getText());
-                if (saving == 0) {
+                if (saving <= 0) {
                     ErrorManager.showError((java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this), 0);
                 } else {
                     try {

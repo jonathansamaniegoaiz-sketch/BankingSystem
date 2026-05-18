@@ -63,6 +63,7 @@ public class signup extends javax.swing.JFrame {
         setUndecorated(true);
 
         jPanel3.setBackground(new java.awt.Color(255, 196, 196));
+        jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         login.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
         login.setForeground(new java.awt.Color(133, 14, 53));

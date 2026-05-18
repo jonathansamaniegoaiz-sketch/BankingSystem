@@ -7,6 +7,7 @@ public class databaseLogic {
 
     //Update names by id
     public static void updateUserName(int id, String name, AiUi ui) {
+        name = name.trim();
         if (AiUi.posit.equalsIgnoreCase("Admin")) {
             String sql = "UPDATE bankingaccounts SET fullName = ? WHERE accId = ?";
             int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to update the name of this user?", "Confirmation", JOptionPane.YES_NO_OPTION);
@@ -16,9 +17,13 @@ public class databaseLogic {
                     stmt.setString(1, name);
                     stmt.setInt(2, id);
 
-                    stmt.executeUpdate();
+                    if (id == 0 || name == null || name.equals("") || name.equals("string")) {
 
-                    ui.appendChatBox("\nSystem: Data Updated");
+                        ui.appendChatBox("\nAi: Invalid Input");
+                    } else {
+                        stmt.executeUpdate();
+                        ui.appendChatBox("\nAi: Data Updated");
+                    }
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -44,16 +49,19 @@ public class databaseLogic {
                     stmt.setInt(2, id);
 
                     stmt.executeUpdate();
-                    
+
                     String sqlTransact = "INSERT INTO transactions(transacId,accId,amount,transacType,transactTo) VALUES(null, ?, ?, ?,?)";
                     PreparedStatement pstmtTransact = conn.prepareStatement(sqlTransact);
-                    pstmtTransact.setInt(1,id);
-                    pstmtTransact.setDouble(2,sBal);
-                    pstmtTransact.setString(3,"Deposit");
-                    pstmtTransact.setString(4,"Cash");
-                    
-                    pstmtTransact.executeUpdate();
-                    ui.appendChatBox("\nAI: Data Updated");
+                    pstmtTransact.setInt(1, id);
+                    pstmtTransact.setDouble(2, sBal);
+                    pstmtTransact.setString(3, "Deposit");
+                    pstmtTransact.setString(4, "Cash");
+                    if (sBal > 0) {
+                        pstmtTransact.executeUpdate();
+                        ui.appendChatBox("\nAI: Data Updated");
+                    } else {
+                        ui.appendChatBox("\nAI: Invalid input");
+                    }
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -76,10 +84,12 @@ public class databaseLogic {
 
                     stmt.setDouble(1, lBal);
                     stmt.setInt(2, id);
-
-                    stmt.executeUpdate();
-
-                    ui.appendChatBox("\nAI: Data Updated");
+                    if (lBal > 0) {
+                        stmt.executeUpdate();
+                        ui.appendChatBox("\nAI: Data Updated");
+                    } else {
+                        ui.appendChatBox("\nAI: Invalid Input");
+                    }
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -94,6 +104,7 @@ public class databaseLogic {
     }
 
     public static void updateUserStatus(int id, String stat, AiUi ui) {
+        stat = stat.trim();
         if (AiUi.posit.equalsIgnoreCase("Admin")) {
             String sql = "UPDATE bankingaccounts SET status = ? WHERE accId = ?";
             int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to update the status of this user?", "Confirmation", JOptionPane.YES_NO_OPTION);
@@ -102,10 +113,13 @@ public class databaseLogic {
 
                     stmt.setString(1, stat);
                     stmt.setInt(2, id);
+                    if (id == 0 || stat == null || stat.equals("") || stat.equals("string")) {
+                        ui.appendChatBox("\nAI: Invalid Input");
+                    } else {
+                        stmt.executeUpdate();
 
-                    stmt.executeUpdate();
-
-                    ui.appendChatBox("\nAI: Data Updated");
+                        ui.appendChatBox("\nAI: Data Updated");
+                    }
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -128,10 +142,11 @@ public class databaseLogic {
 
                     stmt.setString(1, pos);
                     stmt.setInt(2, id);
-
-                    stmt.executeUpdate();
-
-                    ui.appendChatBox("\nAI: Data Updated");
+                    if (id == 0 || pos == null || pos.equals("") || pos.equals("string")) {
+                    } else {
+                        stmt.executeUpdate();
+                        ui.appendChatBox("\nAI: Data Updated");
+                    }
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -153,10 +168,13 @@ public class databaseLogic {
 
                     stmt.setInt(1, pin);
                     stmt.setInt(2, id);
+                    if (id == 0 || pin == 0 || pin < 100000 || pin > 999999) {
+                        ui.appendChatBox("\nAI: Invalid Input");
+                    } else {
+                        stmt.executeUpdate();
 
-                    stmt.executeUpdate();
-
-                    ui.appendChatBox("\nAI: Data Updated");
+                        ui.appendChatBox("\nAI: Data Updated");
+                    }
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -219,7 +237,11 @@ public class databaseLogic {
                         stmt.setString(5, sex);
                         stmt.setInt(6, accId);
 
-                        stmt.executeUpdate();
+                        if (name == null || name.equals("") || name.equals("string") || age > 100 || age < 0 || address == null || address.equals("") || address.equals("string") || phone == null || phone.length() != 11 || sex == null || sex.length() != 1 || !sex.equals("M") || !sex.equals("F")) {
+                            ui.appendChatBox("\nAI: Invalid Input");
+                        } else {
+                            stmt.executeUpdate();
+                        }
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -245,12 +267,15 @@ public class databaseLogic {
 
                     pst.setInt(1, id);
 
-                    int rows = pst.executeUpdate();
-
-                    if (rows > 0) {
-                        ui.appendChatBox("\nAI: Data Deleted");
+                    if (id == 0) {
+                        ui.appendChatBox("\nAI: Invalid Input");
                     } else {
-                        ui.appendChatBox("\nAI: No User found with that ID");
+                        int rows = pst.executeUpdate();
+                        if (rows > 0) {
+                            ui.appendChatBox("\nAI: Data Deleted");
+                        } else {
+                            ui.appendChatBox("\nAI: No User found with that ID");
+                        }
                     }
 
                 } catch (Exception e) {
@@ -272,20 +297,24 @@ public class databaseLogic {
             try (Connection conn = dbconn.connect(); PreparedStatement pst = conn.prepareStatement(sql)) {
 
                 pst.setInt(1, id);
-
-                ResultSet rs = pst.executeQuery();
-
-                if (rs.next()) {
-                    // Assuming columns exist
-                    int userId = rs.getInt("accId");
-                    String name = rs.getString("fullname");
-
-                    ui.appendChatBox("\nAI: User Found ( ");
-                    ui.appendChatBox("ID: " + userId);
-                    ui.appendChatBox(" | Name: " + name + " )");
-
+                if (id == 0) {
+                    ui.appendChatBox("\nAI: Invalid Input");
                 } else {
-                    ui.appendChatBox("\nAI: No User found with that ID");
+                    ResultSet rs = pst.executeQuery();
+
+                    if (rs.next()) {
+                        // Assuming columns exist
+                        int userId = rs.getInt("accId");
+                        String name = rs.getString("fullname");
+
+                        ui.appendChatBox("\nAI: User Found ( ");
+                        ui.appendChatBox("ID: " + userId);
+                        ui.appendChatBox(" | Name: " + name + " )");
+
+                    } else {
+                        ui.appendChatBox("\nAI: No User found with that ID");
+                    }
+
                 }
 
             } catch (Exception e) {
@@ -306,19 +335,23 @@ public class databaseLogic {
 
                 pst.setString(1, fname);
 
-                ResultSet rs = pst.executeQuery();
-
-                if (rs.next()) {
-                    // Assuming columns exist
-                    int userId = rs.getInt("accId");
-                    String name = rs.getString("fullname");
-
-                    ui.appendChatBox("\nAI: User Found ( ");
-                    ui.appendChatBox("ID: " + userId);
-                    ui.appendChatBox(" | Name: " + name + " )");
-
+                if (fname == null || fname.trim().equals("") || fname.equals("string")) {
+                    ui.appendChatBox("\nAI: Invalid Input");
                 } else {
-                    ui.appendChatBox("\nAI: No User found with that name");
+                    ResultSet rs = pst.executeQuery();
+
+                    if (rs.next()) {
+                        // Assuming columns exist
+                        int userId = rs.getInt("accId");
+                        String name = rs.getString("fullname");
+
+                        ui.appendChatBox("\nAI: User Found ( ");
+                        ui.appendChatBox("ID: " + userId);
+                        ui.appendChatBox(" | Name: " + name + " )");
+
+                    } else {
+                        ui.appendChatBox("\nAI: No User found with that name");
+                    }
                 }
 
             } catch (Exception e) {
@@ -370,11 +403,21 @@ public class databaseLogic {
                 PreparedStatement pstmt2 = conn.prepareStatement(sql2);
                 pstmt2.setDouble(1, oldSavings2 + amount);
                 pstmt2.setInt(2, accID);
+                if (amount > 0) {
+                    int totalAffected = pstmt2.executeUpdate() + rowsAffected;
 
-                int totalAffected = pstmt2.executeUpdate() + rowsAffected;
+                    if (rowsAffected > 0) {
+                        ui.appendChatBox("\nAI: Money has been transferred");
+                    }
+                    String sql3 = "update bankingAccounts set totalTrans = ? where accId=?";
+                    PreparedStatement pstmt3 = conn.prepareStatement(sql3);
 
-                if (rowsAffected > 0) {
-                    ui.appendChatBox("\nAI: Money has been transferred");
+                    pstmt3.setDouble(1, cdb.getTotalTrans(userId) + amount);
+                    pstmt3.setInt(2, userId);
+
+                    pstmt3.executeUpdate();
+                } else {
+                    ui.appendChatBox("\nAI: Invalid input");
                 }
 
             } catch (SQLException e) {
@@ -402,24 +445,28 @@ public class databaseLogic {
                         oldSavings = savings;
                     }
                 }
-                            cdb.setTotalDep(accID,newSavings);
-                 String sqlTransact = "INSERT INTO transactions(transacId,accId,amount,transacType,transactTo) VALUES(null, ?, ?, ?,?)";
-                    PreparedStatement pstmtTransact = conn.prepareStatement(sqlTransact);
-                    pstmtTransact.setInt(1,accID);
-                    pstmtTransact.setDouble(2,newSavings);
-                    pstmtTransact.setString(3,"Deposit");
-                    pstmtTransact.setString(4,"Cash");
-                    
-                    pstmtTransact.executeUpdate();
+                cdb.setTotalDep(accID, newSavings);
+                String sqlTransact = "INSERT INTO transactions(transacId,accId,amount,transacType,transactTo) VALUES(null, ?, ?, ?,?)";
+                PreparedStatement pstmtTransact = conn.prepareStatement(sqlTransact);
+                pstmtTransact.setInt(1, accID);
+                pstmtTransact.setDouble(2, newSavings);
+                pstmtTransact.setString(3, "Deposit");
+                pstmtTransact.setString(4, "Cash");
+
+                pstmtTransact.executeUpdate();
 
                 String sql = "update bankingAccounts set sBalance = ? where accId=?";
                 PreparedStatement pstmt = conn.prepareStatement(sql);
                 pstmt.setDouble(1, oldSavings + newSavings);
                 pstmt.setInt(2, accID);
 
-                int rowsAffected = pstmt.executeUpdate();
-                if (rowsAffected > 0) {
-                    ui.appendChatBox("\nAI: Deposit Successfull");
+                if (newSavings == 0) {
+                    ui.appendChatBox("\nAI: Invalid input");
+                } else {
+                    int rowsAffected = pstmt.executeUpdate();
+                    if (rowsAffected > 0) {
+                        ui.appendChatBox("\nAI: Deposit Successfull");
+                    }
                 }
 
             } catch (SQLException e) {
@@ -447,7 +494,7 @@ public class databaseLogic {
                         oldSavings = savings;
                     }
                 }
-                
+
                 cdb db = new cdb();
                 db.setTotalWith(accID, newSavings);
                 String sql = "update bankingAccounts set sBalance = ? where accId=?";
@@ -477,37 +524,72 @@ public class databaseLogic {
         }
 
     }
-    
-    public static void setAddLoan(double InputAmount, AiUi ui){
+
+    public static void setAddLoan(double InputAmount, AiUi ui) {
         int id = AiUi.accId;
-        
+
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to borrow this money?", "Confirmation", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
 
+            try (Connection conn = dbconn.connect()) {
+                String sql = "update bankingAccounts set lBalance = ? WHERE accId = ?";
+                PreparedStatement stmt = conn.prepareStatement(sql);
+
+                double amountdb = cdb.getTotalLoan(id);
+                amountdb += InputAmount;
+
+                stmt.setDouble(1, amountdb);
+                stmt.setInt(2, id);
+                if (InputAmount < 0) {
+                    ui.appendChatBox("Invalid input");
+                } else {
+                    stmt.executeUpdate();
+                }
+
+                String sqlTransact = "INSERT INTO transactions(transacId,accId,amount,transacType,transactTo) VALUES(null, ?, ?, ?,?)";
+                PreparedStatement pstmtTransact = conn.prepareStatement(sqlTransact);
+                pstmtTransact.setInt(1, id);
+                pstmtTransact.setDouble(2, InputAmount);
+                pstmtTransact.setString(3, "Loan");
+                pstmtTransact.setString(4, "Account");
+                pstmtTransact.executeUpdate();
+                ui.appendChatBox("\nAI: Loan Successful");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            ui.appendChatBox("\nAI: Operation Cancelled");
+        }
+    }
+
+    public static void payLoan(double payloan, AiUi ui) {
+
+        int id = AiUi.accId;
         try (Connection conn = dbconn.connect()) {
             String sql = "update bankingAccounts set lBalance = ? WHERE accId = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
-            
-            double amountdb = cdb.getTotalLoan(id);
-            amountdb += InputAmount;
-            
-            stmt.setDouble(1, amountdb);
+
+            double rLoan = cdb.getTotalLoan(id) - payloan;
+
+            stmt.setDouble(1, rLoan);
             stmt.setInt(2, id);
             stmt.executeUpdate();
-            
+
             String sqlTransact = "INSERT INTO transactions(transacId,accId,amount,transacType,transactTo) VALUES(null, ?, ?, ?,?)";
             PreparedStatement pstmtTransact = conn.prepareStatement(sqlTransact);
-            pstmtTransact.setInt(1,id);
-            pstmtTransact.setDouble(2,InputAmount);
-            pstmtTransact.setString(3,"Loan");
-            pstmtTransact.setString(4,"Account");
-            pstmtTransact.executeUpdate();
-            ui.appendChatBox("\nAI: Loan Successful");            
+            pstmtTransact.setInt(1, id);
+            pstmtTransact.setDouble(2, payloan);
+            pstmtTransact.setString(3, "Loan Payment");
+            pstmtTransact.setString(4, "Cash");
+            if (payloan > 0) {
+                pstmtTransact.executeUpdate();
+                ui.appendChatBox("\nAI: Payment Successful");
+            } else {
+                ui.appendChatBox("\nAI: Input Error");
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-                } else {
-            ui.appendChatBox("\nAI: Operation Cancelled");
         }
     }
 

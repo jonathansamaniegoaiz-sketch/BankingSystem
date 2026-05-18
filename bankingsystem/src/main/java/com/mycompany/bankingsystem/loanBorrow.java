@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  *
  * @author Syncro
  */
-public class loan extends javax.swing.JFrame {
+public class loanBorrow extends javax.swing.JFrame {
 
     int accId;
     boolean aiFrame;
@@ -23,13 +23,13 @@ public class loan extends javax.swing.JFrame {
     /**
      * Creates new form loan
      */
-    public loan() {
+    public loanBorrow() {
         initComponents();
         setLocationRelativeTo(null);
         setVisible(true);
     }
 
-    public loan(int id, String pos) {
+    public loanBorrow(int id, String pos) {
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
@@ -320,7 +320,7 @@ public class loan extends javax.swing.JFrame {
                 .addGap(71, 71, 71))
         );
 
-        jButton1.setBackground(new java.awt.Color(238, 105, 131));
+        jButton1.setBackground(new java.awt.Color(255, 196, 196));
         jButton1.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(133, 14, 53));
         jButton1.setText("PAY");
@@ -330,7 +330,7 @@ public class loan extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(255, 196, 196));
+        jButton2.setBackground(new java.awt.Color(238, 105, 131));
         jButton2.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(133, 14, 53));
         jButton2.setText("BORROW");
@@ -439,7 +439,7 @@ public class loan extends javax.swing.JFrame {
     }//GEN-LAST:event_trasnferActionPerformed
 
     private void loanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loanActionPerformed
-        loan loan = new loan(accId, posit);
+        loanBorrow loan = new loanBorrow(accId, posit);
         transition.switchFrame(this, loan);
     }//GEN-LAST:event_loanActionPerformed
 
@@ -480,11 +480,11 @@ public class loan extends javax.swing.JFrame {
                     try {
                         cdb db = new cdb();
 
-                        db.payLoan(accId, loan);
+                        db.setAddLoan(accId, loan);
                         JOptionPane.showMessageDialog(
                                 null,
-                                "Payment successfully!",
-                                "Pay Success",
+                                "Book borrowed successfully!",
+                                "Borrow Success",
                                 JOptionPane.INFORMATION_MESSAGE
                         );
                         sLoan.setText("0.00");
@@ -509,15 +509,15 @@ public class loan extends javax.swing.JFrame {
         new AiUi(accId, true, this, posit);
     }//GEN-LAST:event_dianaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        loan loan = new loan(accId, posit);
-        transition.switchFrame(this, loan);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         loanBorrow lb = new loanBorrow(accId,posit);
         transition.switchFrame(this, lb);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        loan loan = new loan(accId, posit);
+        transition.switchFrame(this, loan);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -536,20 +536,21 @@ public class loan extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(loan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(loanBorrow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(loan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(loanBorrow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(loan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(loanBorrow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(loan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(loanBorrow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new loan().setVisible(true);
+                new loanBorrow().setVisible(true);
             }
         });
     }

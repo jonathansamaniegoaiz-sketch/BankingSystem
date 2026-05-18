@@ -155,7 +155,7 @@ public class transactionUser extends javax.swing.JFrame {
                 String trans = rs.getString("transactTo");
                 
                 if(amountDb <= amount){
-                    model.addRow(new Object[]{tid,accId,type,amountDb,interest,date});
+                    model.addRow(new Object[]{tid,accId,type,amountDb,interest,date,trans});
                 }
             }
         }

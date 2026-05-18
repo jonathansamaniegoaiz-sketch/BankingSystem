@@ -100,8 +100,8 @@ public class udashboard extends javax.swing.JFrame {
         double Lamount = db.getTotalLoan(id);
         loanAmount.setText(String.format("%.2f", Lamount));
         
-        double count = db.getTransactCount(id);
-        transactions.setText(String.format("%.2f", count));
+        int count = db.getTransactCount(id);
+        transactions.setText(String.valueOf(count));
     }
    
 

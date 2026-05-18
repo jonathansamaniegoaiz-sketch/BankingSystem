@@ -118,7 +118,7 @@ public class widthrawWithCash extends javax.swing.JFrame {
         buttonsPanel.setPreferredSize(new java.awt.Dimension(200, 500));
 
         deposit.setBackground(new java.awt.Color(255, 196, 196));
-        deposit.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 11)); // NOI18N
+        deposit.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 11)); // NOI18N
         deposit.setForeground(new java.awt.Color(133, 14, 53));
         deposit.setText("Deposit");
         deposit.addActionListener(new java.awt.event.ActionListener() {
@@ -128,7 +128,7 @@ public class widthrawWithCash extends javax.swing.JFrame {
         });
 
         withdraw.setBackground(new java.awt.Color(238, 105, 131));
-        withdraw.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 11)); // NOI18N
+        withdraw.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 11)); // NOI18N
         withdraw.setForeground(new java.awt.Color(133, 14, 53));
         withdraw.setText("Withdraw");
         withdraw.setPreferredSize(new java.awt.Dimension(70, 35));
@@ -139,7 +139,7 @@ public class widthrawWithCash extends javax.swing.JFrame {
         });
 
         transfer.setBackground(new java.awt.Color(255, 196, 196));
-        transfer.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 11)); // NOI18N
+        transfer.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 11)); // NOI18N
         transfer.setForeground(new java.awt.Color(133, 14, 53));
         transfer.setText("Transfer");
         transfer.setPreferredSize(new java.awt.Dimension(70, 35));
@@ -150,7 +150,7 @@ public class widthrawWithCash extends javax.swing.JFrame {
         });
 
         loan.setBackground(new java.awt.Color(255, 196, 196));
-        loan.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 11)); // NOI18N
+        loan.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 11)); // NOI18N
         loan.setForeground(new java.awt.Color(133, 14, 53));
         loan.setText("Loan");
         loan.setPreferredSize(new java.awt.Dimension(70, 35));
@@ -161,7 +161,7 @@ public class widthrawWithCash extends javax.swing.JFrame {
         });
 
         transac.setBackground(new java.awt.Color(255, 196, 196));
-        transac.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 11)); // NOI18N
+        transac.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 11)); // NOI18N
         transac.setForeground(new java.awt.Color(133, 14, 53));
         transac.setText("Transaction");
         transac.setPreferredSize(new java.awt.Dimension(70, 35));
@@ -172,7 +172,7 @@ public class widthrawWithCash extends javax.swing.JFrame {
         });
 
         settings.setBackground(new java.awt.Color(255, 196, 196));
-        settings.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 11)); // NOI18N
+        settings.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 11)); // NOI18N
         settings.setForeground(new java.awt.Color(133, 14, 53));
         settings.setText("Settings");
         settings.setPreferredSize(new java.awt.Dimension(100, 35));
@@ -183,7 +183,7 @@ public class widthrawWithCash extends javax.swing.JFrame {
         });
 
         logout.setBackground(new java.awt.Color(255, 196, 196));
-        logout.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 11)); // NOI18N
+        logout.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 11)); // NOI18N
         logout.setForeground(new java.awt.Color(133, 14, 53));
         logout.setText("Logout");
         logout.setPreferredSize(new java.awt.Dimension(100, 35));
@@ -194,7 +194,7 @@ public class widthrawWithCash extends javax.swing.JFrame {
         });
 
         savings3.setBackground(new java.awt.Color(255, 196, 196));
-        savings3.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 11)); // NOI18N
+        savings3.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 11)); // NOI18N
         savings3.setForeground(new java.awt.Color(133, 14, 53));
         savings3.setText("Savings");
         savings3.setPreferredSize(new java.awt.Dimension(70, 35));
@@ -205,7 +205,7 @@ public class widthrawWithCash extends javax.swing.JFrame {
         });
 
         dashboard.setBackground(new java.awt.Color(255, 196, 196));
-        dashboard.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 11)); // NOI18N
+        dashboard.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 11)); // NOI18N
         dashboard.setForeground(new java.awt.Color(133, 14, 53));
         dashboard.setText("Dashboard");
         dashboard.addActionListener(new java.awt.event.ActionListener() {
@@ -290,7 +290,7 @@ public class widthrawWithCash extends javax.swing.JFrame {
         jLabel2.setText("WITHDRAW");
 
         confirmBtn2.setBackground(new java.awt.Color(238, 105, 131));
-        confirmBtn2.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 11)); // NOI18N
+        confirmBtn2.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 11)); // NOI18N
         confirmBtn2.setForeground(new java.awt.Color(133, 14, 53));
         confirmBtn2.setText("Confirm");
         confirmBtn2.setToolTipText("");
@@ -346,7 +346,7 @@ public class widthrawWithCash extends javax.swing.JFrame {
         );
 
         withdrawEcash.setBackground(new java.awt.Color(255, 196, 196));
-        withdrawEcash.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 11)); // NOI18N
+        withdrawEcash.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 11)); // NOI18N
         withdrawEcash.setForeground(new java.awt.Color(133, 14, 53));
         withdrawEcash.setText("E - CASH");
         withdrawEcash.setPreferredSize(new java.awt.Dimension(70, 35));
@@ -357,7 +357,7 @@ public class widthrawWithCash extends javax.swing.JFrame {
         });
 
         savings2.setBackground(new java.awt.Color(238, 105, 131));
-        savings2.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 11)); // NOI18N
+        savings2.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 11)); // NOI18N
         savings2.setForeground(new java.awt.Color(133, 14, 53));
         savings2.setText("CASH");
         savings2.setPreferredSize(new java.awt.Dimension(70, 35));
@@ -382,16 +382,17 @@ public class widthrawWithCash extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(189, 189, 189)
-                .addComponent(withdrawEcash, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(savings2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(72, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(90, 90, 90))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(withdrawEcash, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(savings2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(90, 90, 90))))
         );
 
         pfpContainer.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Banko ni Negro", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.BELOW_BOTTOM, new java.awt.Font("Microsoft Sans Serif", 1, 18), new java.awt.Color(133, 14, 53))); // NOI18N
@@ -510,8 +511,13 @@ public class widthrawWithCash extends javax.swing.JFrame {
        }else{
            try{
                double newSavings = Double.parseDouble(Wsavings.trim());
-                db.setSavingsWithdrawCash(accId, newSavings);
+               if(newSavings <= 0){
+                   ErrorManager.showError((java.awt.Frame)javax.swing.SwingUtilities.getWindowAncestor(this), 0);
+               }else{
+                   db.setSavingsWithdrawCash(accId, newSavings);
                 ecashNum.setText("0.00");
+               }
+                
            }catch(NumberFormatException e){           
                ErrorManager.showError((java.awt.Frame)javax.swing.SwingUtilities.getWindowAncestor(this), 0);
            }
