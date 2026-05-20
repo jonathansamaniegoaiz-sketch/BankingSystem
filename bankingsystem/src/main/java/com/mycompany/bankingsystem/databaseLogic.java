@@ -192,7 +192,7 @@ public class databaseLogic {
     public static void addUser(String name, int age, String address, String phone, int pin, String pos, String sex, String status, AiUi ui) {
         int accId = 0;
         if (AiUi.posit.equalsIgnoreCase("Admin")) {
-            int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to update the status of this user?", "Confirmation", JOptionPane.YES_NO_OPTION);
+            int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to add this user?", "Confirmation", JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
 
                 String sqlSetMaintable = "INSERT INTO bankingaccounts (fullName,position,pin,status) VALUES (?, ?, ?,?)";
@@ -237,18 +237,18 @@ public class databaseLogic {
                         stmt.setString(5, sex);
                         stmt.setInt(6, accId);
 
-                        if (name == null || name.equals("") || name.equals("string") || age > 100 || age < 0 || address == null || address.equals("") || address.equals("string") || phone == null || phone.length() != 11 || sex == null || sex.length() != 1 || !sex.equals("M") || !sex.equals("F")) {
+                        if (name == null || name.equals("") || name.equals("string") || age > 100 || age < 0 || address == null || address.equals("") || address.equals("string") || phone == null || phone.length() != 11 || sex == null || sex.length() != 1 || !sex.equals("m") || !sex.equals("f")) {
                             ui.appendChatBox("\nAI: Invalid Input");
                         } else {
                             stmt.executeUpdate();
+                            ui.appendChatBox("\nAI: Account successfully created");
                         }
 
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
-                // Success with a title and info icon
-                ui.appendChatBox("\nAI: Account successfully created");
+
             } else {
                 ui.appendChatBox("\nAI: Operation Cancelled");
             }
@@ -404,9 +404,16 @@ public class databaseLogic {
                 pstmt2.setDouble(1, oldSavings2 + amount);
                 pstmt2.setInt(2, accID);
                 if (amount > 0) {
+                    String sqlTransact = "INSERT INTO transactions(transacId,accId,amount,transacType,transactTo) VALUES(null, ?, ?, ?,?)";
+                    PreparedStatement pstmtTransact = conn.prepareStatement(sqlTransact);
+                    pstmtTransact.setInt(1, userId);
+                    pstmtTransact.setDouble(2, amount);
+                    pstmtTransact.setString(3, "Transfer");
+                    pstmtTransact.setInt(4, accID);
                     int totalAffected = pstmt2.executeUpdate() + rowsAffected;
 
                     if (rowsAffected > 0) {
+                        pstmtTransact.executeUpdate();
                         ui.appendChatBox("\nAI: Money has been transferred");
                     }
                     String sql3 = "update bankingAccounts set totalTrans = ? where accId=?";
@@ -453,8 +460,6 @@ public class databaseLogic {
                 pstmtTransact.setString(3, "Deposit");
                 pstmtTransact.setString(4, "Cash");
 
-                pstmtTransact.executeUpdate();
-
                 String sql = "update bankingAccounts set sBalance = ? where accId=?";
                 PreparedStatement pstmt = conn.prepareStatement(sql);
                 pstmt.setDouble(1, oldSavings + newSavings);
@@ -465,6 +470,7 @@ public class databaseLogic {
                 } else {
                     int rowsAffected = pstmt.executeUpdate();
                     if (rowsAffected > 0) {
+                        pstmtTransact.executeUpdate();
                         ui.appendChatBox("\nAI: Deposit Successfull");
                     }
                 }
@@ -508,6 +514,13 @@ public class databaseLogic {
 
                         int rowsAffected = pstmt.executeUpdate();
                         if (rowsAffected > 0) {
+                            String sqlTransact = "INSERT INTO transactions(transacId,accId,amount,transacType,transactTo) VALUES(null, ?, ?, ?,?)";
+                            PreparedStatement pstmtTransact = conn.prepareStatement(sqlTransact);
+                            pstmtTransact.setInt(1, accID);
+                            pstmtTransact.setDouble(2, newSavings);
+                            pstmtTransact.setString(3, "Withdraw");
+                            pstmtTransact.setString(4, "Cash");
+                            pstmtTransact.executeUpdate();
                             ui.appendChatBox("\nAI: Withdraw successfull");
                         }
                     }

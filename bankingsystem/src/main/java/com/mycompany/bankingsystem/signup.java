@@ -38,11 +38,11 @@ public class signup extends javax.swing.JFrame {
         pin1 = new javax.swing.JLabel();
         ageIn = new javax.swing.JSpinner();
         pin2 = new javax.swing.JLabel();
-        phoneIn = new javax.swing.JPasswordField();
         email1 = new javax.swing.JLabel();
         male = new javax.swing.JRadioButton();
         fmale = new javax.swing.JRadioButton();
         addressIn = new javax.swing.JTextField();
+        phoneIn = new javax.swing.JTextField();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -101,9 +101,6 @@ public class signup extends javax.swing.JFrame {
         pin2.setForeground(new java.awt.Color(133, 14, 53));
         pin2.setText("PHONE NUMBER");
 
-        phoneIn.setBackground(new java.awt.Color(252, 245, 238));
-        phoneIn.setForeground(new java.awt.Color(133, 14, 53));
-
         email1.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
         email1.setForeground(new java.awt.Color(133, 14, 53));
         email1.setText("SEX");
@@ -114,6 +111,10 @@ public class signup extends javax.swing.JFrame {
 
         addressIn.setBackground(new java.awt.Color(252, 245, 238));
         addressIn.setForeground(new java.awt.Color(133, 14, 53));
+
+        phoneIn.setBackground(new java.awt.Color(252, 245, 238));
+        phoneIn.setForeground(new java.awt.Color(133, 14, 53));
+        phoneIn.addActionListener(this::phoneInActionPerformed);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -142,9 +143,7 @@ public class signup extends javax.swing.JFrame {
                         .addComponent(login))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(phoneIn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                            .addComponent(addressIn, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addComponent(addressIn, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,8 +156,11 @@ public class signup extends javax.swing.JFrame {
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(male)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(fmale)))))))
-                .addContainerGap(9, Short.MAX_VALUE))
+                                        .addComponent(fmale))))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(phoneIn, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,6 +270,10 @@ public class signup extends javax.swing.JFrame {
 
     }//GEN-LAST:event_nameInActionPerformed
 
+    private void phoneInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneInActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_phoneInActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -310,7 +316,7 @@ public class signup extends javax.swing.JFrame {
     private javax.swing.JLabel login;
     private javax.swing.JRadioButton male;
     private javax.swing.JTextField nameIn;
-    private javax.swing.JPasswordField phoneIn;
+    private javax.swing.JTextField phoneIn;
     private javax.swing.JLabel pin;
     private javax.swing.JLabel pin1;
     private javax.swing.JLabel pin2;

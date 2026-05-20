@@ -71,8 +71,10 @@ public class OllamaService {
             
         + "15. payLoan -> {\"payment\": double}\n"
         + "    Description: User payment to loan"
+            
         + "16. chatBot -> {\"message\": string}\n"
-        + "    Description: Respond conversationally when no valid action applies. Make sure its connected to user prompt. when giving sample function use the SelectByName only\n\n"
+        + "    Description: Respond conversationally when no valid action applies. Make sure its connected to user prompt. Do not give empty parameters. Avoid saying \"invalid\" input just converse to them"
+        + "    .In giving sample function do not include {} or braces in it and do not give valid actions name to user give them the word needed in strict action mapping to use that function\n\n"
 
         + "STRICT ACTION MAPPING:\n"
         + "- If input contains 'add' → use addUser\n"
@@ -91,7 +93,7 @@ public class OllamaService {
         + "- If input contains 'borrow', 'loan' → use setLoan\n"
         + "- If input contains 'pay', 'payment' → use payLoan"
         + "- Otherwise → use chatBot\n\n"
-
+            
         + "STRICT RULES:\n"
         + "- NEVER guess missing parameters\n"
         + "- NEVER output null\n"
@@ -103,7 +105,7 @@ public class OllamaService {
 
         + "FALLBACK:\n"
         + "- If required data is missing → use chatBot\n\n"
-        + "- If action mapping is invalid → use chatBot\n\n"
+        + "- If action mapping is invalid → use chatBot but it doesn't mean it was invalid that means the user was calling chatBot\n\n"
 
         + "INPUT RULE:\n"
         + "- Only read text between ### USER INPUT ### and ### END ###\n";
